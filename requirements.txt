@@ -1,0 +1,8 @@
+pandas
+yfinance
+numpy
+ta
+pandas-profiling
+plotly
+pymongo
+matplotlib
