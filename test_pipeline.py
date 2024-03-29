@@ -1,12 +1,11 @@
 import unittest
-from datetime import datetime
 from src.ingest_data import ingest_ohlc_data
 from src.clean_data import clean_ohlc_data
 from src.transform_data import transform_data
 
 class TestPipeline(unittest.TestCase):
     def setUp(self):
-        # Set up test data
+        # Initialize attributes
         self.stocks = ['AAPL']
         self.start_date = '2022-01-01'
         self.end_date = '2022-01-10'
@@ -50,9 +49,7 @@ class TestPipeline(unittest.TestCase):
             self.assertTrue('Price_Change' in df.columns)
         # Additional checks for errors and data quality
         for stock, df in transformed_data.items():
-            self.assertFalse(df.empty, f"No data after transformation for {stock}")
-
-    # Add more tests as needed for compression, MongoDB storage, etc.
+            self.assertFalse(df.empty, f"No data after transformation for {stock}")        
 
 if __name__ == '__main__':
     unittest.main()

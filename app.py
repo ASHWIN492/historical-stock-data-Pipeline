@@ -5,12 +5,14 @@ from test_pipeline import TestPipeline
 import unittest
 
 def run_tests():
-    
     loader = unittest.TestLoader()
     suite = loader.loadTestsFromTestCase(TestPipeline)
     runner = unittest.TextTestRunner()
     result = runner.run(suite)
     return result
+
+def run_data_pipeline(stocks, start_date, end_date, resample_freq, compression_directory, mongodb_uri, db_name):
+    return run_pipeline(stocks, start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d"), resample_freq, compression_directory, mongodb_uri, db_name)
 
 def main():
     st.title("Financial Data Pipeline")
@@ -31,11 +33,9 @@ def main():
     # Run pipeline
     if st.button("Run Pipeline"):
         st.write("Running pipeline...")
-        transformed_data = run_pipeline(stocks, start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d"), resample_freq, compression_directory, mongodb_uri, db_name)
+        transformed_data = run_data_pipeline(stocks, start_date, end_date, resample_freq, compression_directory, mongodb_uri, db_name)
         st.write("Pipeline completed successfully.")
     
-        
-
     # Display visualization
     if transformed_data:
         st.subheader("Visualization")
